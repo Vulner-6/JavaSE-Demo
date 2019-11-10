@@ -22,33 +22,42 @@ public class Main {
         //声明包子类
         BaoziNew baoziNew=new BaoziNew();
 
-        //声明做包子线程和上菜线程
+        //声明做包子线程和上菜线程,以及消费者线程
         Thread zuoBaoZi=new Thread(new DoBaozi(baoziNew,l,condition1));
         Thread shangCai=new Thread(new ShangCai(baoziNew,l,condition1));
+        Thread chiBaoZi=new Thread(new XiaoFeiZhe(baoziNew,l));
         ExecutorService es=Executors.newFixedThreadPool(5);
 
-        //循环5个线程做5个包子，看耗时
-        for(int i=0;i<5;i++){
-            es.submit(zuoBaoZi);
-        }
-        try {
-            Thread.sleep(5050);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        int test=0;
+        while (test<100){
+            //循环5个线程做5个包子，看耗时
+            for(int i=0;i<5;i++){
+                es.submit(zuoBaoZi);
+            }
+            try {
+                Thread.sleep(5050);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
-        //做好包子再上菜
-        for(int i=0;i<5;i++){
-            es.submit(shangCai);
+            //做好包子再上菜
+            for(int i=0;i<4;i++){
+                es.submit(shangCai);
+            }
+
+            //消费者吃包子
+
+            for(int i=0;i<3;i++){
+                es.submit(chiBaoZi);
+            }
+            test++;
+            try {
+                Thread.sleep(1000);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
-        try {
-            Thread.sleep(3050);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-
         long stopTime=System.currentTimeMillis();
         long spendTime=stopTime-startTime;
         System.out.println("共耗时："+spendTime);
