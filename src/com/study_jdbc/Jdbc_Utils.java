@@ -13,7 +13,8 @@ import java.util.Properties;
  *   2.抽取一个方法，获得连接对象
  *   3.抽取一个方法，释放资源
  */
-public class Jdbc_Utils {
+public class Jdbc_Utils
+{
     private static String url;
     private static String user;
     private static String password;
@@ -43,11 +44,17 @@ public class Jdbc_Utils {
             driver=properties.getProperty("driver");
             //4.注册驱动
             Class.forName(driver);
-        }catch (FileNotFoundException e){
+        }
+        catch (FileNotFoundException e)
+        {
             e.printStackTrace();
-        }catch (IOException e){
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
-        }catch (ClassNotFoundException e){
+        }
+        catch (ClassNotFoundException e)
+        {
             e.printStackTrace();
         }
 
@@ -57,10 +64,14 @@ public class Jdbc_Utils {
      * 获取连接
      * @return 连接对象
      */
-    public static Connection getConnection(){
-        try{
+    public static Connection getConnection()
+    {
+        try
+        {
             return DriverManager.getConnection(url,user,password);
-        }catch (SQLException e){
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
         return null;
@@ -71,19 +82,60 @@ public class Jdbc_Utils {
      * @param stmt
      * @param connection
      */
-    public static void close(Statement stmt,Connection connection){
+    public static void close(Statement stmt,Connection connection)
+    {
         //之所以不放在一起判断，是因为怕捕获异常导致后面部分资源的释放代码无法执行
-        if(stmt!=null){
-            try {
+        if(stmt!=null)
+        {
+            try
+            {
                 stmt.close();
-            }catch (SQLException e){
+            }
+            catch (SQLException e)
+            {
                 e.printStackTrace();
             }
         }
-        if(connection!=null){
-            try {
+        if(connection!=null)
+        {
+            try
+            {
                 connection.close();
-            }catch (SQLException e){
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 释放资源，针对增删改，没有查
+     * @param pstmt
+     * @param connection
+     */
+    public static void close(PreparedStatement pstmt,Connection connection)
+    {
+        //之所以不放在一起判断，是因为怕捕获异常导致后面部分资源的释放代码无法执行
+        if(pstmt!=null)
+        {
+            try
+            {
+                pstmt.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if(connection!=null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (SQLException e)
+            {
                 e.printStackTrace();
             }
         }
@@ -95,27 +147,85 @@ public class Jdbc_Utils {
      * @param stmt
      * @param connection
      */
-    public static void close(ResultSet resultSet, Statement stmt, Connection connection){
+    public static void close(ResultSet resultSet, Statement stmt, Connection connection)
+    {
         //之所以不放在一起判断，是因为怕捕获异常导致后面部分资源的释放代码无法执行
-        if(resultSet!=null){
-            try {
+        if(resultSet!=null)
+        {
+            try
+            {
                 resultSet.close();
-            }catch (SQLException e){
+            }
+            catch (SQLException e)
+            {
                 e.printStackTrace();
             }
 
         }
-        if(stmt!=null){
-            try {
+        if(stmt!=null)
+        {
+            try
+            {
                 stmt.close();
-            }catch (SQLException e){
+            }
+            catch (SQLException e)
+            {
                 e.printStackTrace();
             }
         }
-        if(connection!=null){
-            try {
+        if(connection!=null)
+        {
+            try
+            {
                 connection.close();
-            }catch (SQLException e){
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 利用方法重写的方式，自动根据传入的参数释放资源，这里重写PreparedStatement
+     * @param resultSet
+     * @param pstmt
+     * @param connection
+     */
+    public static void close(ResultSet resultSet, PreparedStatement pstmt, Connection connection)
+    {
+        //之所以不放在一起判断，是因为怕捕获异常导致后面部分资源的释放代码无法执行
+        if(resultSet!=null)
+        {
+            try
+            {
+                resultSet.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+
+        }
+        if(pstmt!=null)
+        {
+            try
+            {
+                pstmt.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if(connection!=null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (SQLException e)
+            {
                 e.printStackTrace();
             }
         }

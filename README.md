@@ -1,6 +1,9 @@
 # JavaSE-Demo
 练习 JavaSE 编程，记录程序 Demo，让自己熟练运用 JavaSE 相关知识解决遇到的问题。
 
+# 2019.11.14更新
+1.练习preparedStatement安全的预编译查询，重写了工具类
+
 # 2019.11.13更新
 1.练习JDBC封装工具类，数据表对象化
 
