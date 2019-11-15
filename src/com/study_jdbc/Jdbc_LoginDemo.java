@@ -87,8 +87,6 @@ public class Jdbc_LoginDemo
             System.out.println("Jdbc_LoginDemo.login()第三个参数必须为true");
             return false;
         }
-
-
     }
     public static void main(String[] args)
     {
