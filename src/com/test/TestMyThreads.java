@@ -3,7 +3,7 @@ package com.test;
 import com.study_thread.Hero;
 import com.study_thread.MyRunable;
 import com.study_thread.MyThreads;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class TestMyThreads {
     //多线程无法进行单元测试，需要使用其他的方法。
