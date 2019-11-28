@@ -1,0 +1,6 @@
+一、配置druid环境依赖
+1.下载并导入druid.jar包
+2.编写properties配置文件，在任意目录都可以
+3.类中读取配置文件 InputStream is=Demoxxx.class.getClassloader().getResourceAsStream("druid.properties")
+4.创建连接池对象  DataSource ds=DruidDataSourceFactory.createDataSource()
+5.获取连接 Connection conn=ds.getConnection()

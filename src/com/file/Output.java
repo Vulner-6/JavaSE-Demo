@@ -22,8 +22,6 @@ public class Output
             byte[] bytes2="你好".getBytes();
             System.out.println("\"你好\"的字节显示是："+ Arrays.toString(bytes2));
             fos.write(bytes2);
-
-
         }
         catch (Exception e)
         {
