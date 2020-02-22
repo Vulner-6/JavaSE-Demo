@@ -19,15 +19,14 @@ public class C3P0_Demo1
         try
         {
             ComboPooledDataSource cpds = new ComboPooledDataSource();
-            cpds.setDriverClass( "com.mysql.cj.jdbc.Driver" );
+            cpds.setDriverClass("com.mysql.cj.jdbc.Driver");
             //我这里必须要加后面的乱七八糟东西，否则会报异常错误。
-            cpds.setJdbcUrl( "jdbc:mysql://localhost:3306/study_jdbc?useUnicode=true" +
-                    "&characterEncoding=utf-8&useSSL=false&serverTimezone = GMT" );
+            cpds.setJdbcUrl("jdbc:mysql://localhost:3306/study_jdbc?useUnicode=true" + "&characterEncoding=utf-8&useSSL=false&serverTimezone = GMT");
             cpds.setUser("root");
             cpds.setPassword("root");
             //设置预编译池
-            cpds.setMaxStatements( 180 );
-            Connection conn=cpds.getConnection();
+            cpds.setMaxStatements(180);
+            Connection conn = cpds.getConnection();
             System.out.println("未发现异常");
             System.out.println(conn);
             //用完数据库连接池，需要关闭

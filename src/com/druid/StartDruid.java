@@ -19,8 +19,8 @@ public class StartDruid
     {
         //1.导入jar包
         //2.获取配置文件
-        Properties properties=new Properties();
-        InputStream inputStream=StartDruid.class.getClassLoader().getResourceAsStream("druid.properties");
+        Properties properties = new Properties();
+        InputStream inputStream = StartDruid.class.getClassLoader().getResourceAsStream("druid.properties");
         try
         {
             properties.load(inputStream);
@@ -30,37 +30,37 @@ public class StartDruid
             e.printStackTrace();
         }
         //3.创建数据库连接池对象
-        DataSource dataSource=null;
+        DataSource dataSource = null;
         try
         {
-            dataSource= DruidDataSourceFactory.createDataSource(properties);
+            dataSource = DruidDataSourceFactory.createDataSource(properties);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
         //4.获取连接
-        Connection connection=null;
-        Statement stmt=null;
-        ResultSet rs=null;
+        Connection connection = null;
+        Statement stmt = null;
+        ResultSet rs = null;
         try
         {
             //先用基本的jdbc进行查询
-            connection=dataSource.getConnection();
-            String sql="SELECT * FROM users";
-            stmt =connection.createStatement();
-            rs =stmt.executeQuery(sql);
+            connection = dataSource.getConnection();
+            String sql = "SELECT * FROM users";
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(sql);
             while (rs.next())
             {
-                String name=rs.getString("name");
+                String name = rs.getString("name");
                 System.out.println(name);
             }
             System.out.println(rs.toString());
             System.out.println("=====================================================================");
             //使用spring的jdbcTemplate进行查询
-            JdbcTemplate jdbcTemplate=new JdbcTemplate();
+            JdbcTemplate jdbcTemplate = new JdbcTemplate();
             jdbcTemplate.setDataSource(dataSource);
-            List list =jdbcTemplate.queryForList(sql);
+            List list = jdbcTemplate.queryForList(sql);
             System.out.println(list);
         }
         catch (SQLException e)
@@ -95,7 +95,6 @@ public class StartDruid
             }
 
         }
-
 
     }
 }
